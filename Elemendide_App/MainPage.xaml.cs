@@ -44,11 +44,16 @@ namespace Elemendide_App
             {
                 Text = "Valgusfoor",
                 BackgroundColor = Color.LightGreen,
+            };         
+            Button ttt_btn = new Button()
+            {
+                Text = "Valgusfoor",
+                BackgroundColor = Color.LightGreen,
             };
 
             StackLayout st = new StackLayout()
             {
-                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn }
+                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn, ttt_btn }
             };
 
             st.BackgroundColor = Color.AntiqueWhite;
@@ -59,6 +64,12 @@ namespace Elemendide_App
             Date_btn.Clicked += Date_btn_Clicked;
             SS_btn.Clicked += SS_btn_Clicked;
             vlg_btn.Clicked += Vlg_btn_Clicked;
+            ttt_btn.Clicked += Ttt_btn_Clicked;
+        }
+
+        private async void Ttt_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new TTT_Page());
         }
 
         private async void Vlg_btn_Clicked(object sender, EventArgs e)
