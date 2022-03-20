@@ -6,22 +6,25 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using static Elemendide_App.StepperSlider_page;
 namespace Elemendide_App
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TTT_Page : ContentPage
     {
         Grid grid2X1, grid3X3;
-        BoxView b;
-        Button uus_nang;
-        public bool esimene;
+        Xamarin.Forms.Image b;
+        Image img1, img2;
+        Button uus_nang, style;
+        public bool esimene;    
+        public int F=0;
+        public static string Style1 = "2";
         public TTT_Page()
         {
             grid2X1 = new Grid
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                BackgroundColor = Color.Blue,
+                BackgroundColor = Color.Gray,
                 RowDefinitions =
                 {
 
@@ -56,7 +59,7 @@ namespace Elemendide_App
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    b = new BoxView { BackgroundColor=Color.Green};
+                    b = new Xamarin.Forms.Image { Source = "null1.png"};
                     grid3X3.Children.Add(b,j, i);
                     TapGestureRecognizer tap = new TapGestureRecognizer();
                     tap.Tapped += Tap_Tapped;
@@ -69,22 +72,35 @@ namespace Elemendide_App
                 Text = "Uus nang"
             };
             uus_nang.Clicked += Uus_nang_Clicked;
-
-
-            grid2X1.Children.Add(uus_nang, 0,1);
-
+            style = new Button()
+            {
+                Text = "Style"
+            };
+            img1 = new Image { Source = ImageSource.FromFile("krest"+Style1+".png") };
+            grid2X1.Children.Add(uus_nang, 0,0);
+            grid2X1.Children.Add(img1, 0, 1);
+            grid2X1.Children.Add(style, 0,2);
+            style.Clicked += Style_Clicked;
             Content = grid2X1;
         }
+
+        private async void Style_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new StepperSlider_page());
+        }
+
         public async void Kes_on_esimene()
         {
             string esimine = await DisplayPromptAsync("Kes on esimene?","Valik",initialValue:"1",maxLength:1,keyboard:Keyboard.Numeric);
             if (esimine == "1")
             {
                 esimene = true;
+                img1.Source = ImageSource.FromFile("krest" + Style1 + ".png");
             }
             else
             {
                 esimene = false;
+                img1.Source = ImageSource.FromFile("Nolik" + Style1 + ".png");
             }
         }
         int Tulemus = 2;
@@ -92,14 +108,17 @@ namespace Elemendide_App
 
         private void Uus_nang_Clicked(object sender, EventArgs e)
         {
+            grid2X1.Children.Remove(uus_nang);
+            grid2X1.Children.Remove(style);
             Uus_nang();
             Kes_on_esimene();
+
         }
         public void Uus_nang()
         {
             grid3X3 = new Grid
             {
-                BackgroundColor = Color.Red,
+                BackgroundColor = Color.FromRgb(RED,GREEN,BLUE),
                 RowDefinitions =
                 {
 
@@ -119,7 +138,7 @@ namespace Elemendide_App
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    b = new BoxView { BackgroundColor = Color.Green };
+                    b = new Xamarin.Forms.Image { Source = "null1.png" };
                     grid3X3.Children.Add(b, j, i);
                     TapGestureRecognizer tap = new TapGestureRecognizer();
                     tap.Tapped += Tap_Tapped;
@@ -154,40 +173,72 @@ namespace Elemendide_App
             {
                 Tulemus = 1;
             }
-
+            if (checkTie())
+            {
+                DisplayAlert("Mängu lõpp", "mäng on viigis", "OK");
+            }
             return Tulemus;
 
         }
         public void lopp()
         {
             Tulemus = Kontroll();
+            F = 1;
             if (Tulemus == 0)
             {
-                DisplayAlert("Võit", "42", "ok!");
+                DisplayAlert("Võit", "Traps", "ok!");
                 Tulemus = 2;
+                Tulemused = new int[3, 3];
+                grid2X1.Children.Add(uus_nang, 0, 1);
+                grid2X1.Children.Add(style, 0, 2);
+                F = 0;
             }
             if (Tulemus == 1)
             {
-                DisplayAlert("Võit", "32", "ok!");
+                DisplayAlert("Võit", "Trips", "ok!");
                 Tulemus = 2;
+                Tulemused = new int[3, 3];
+                grid2X1.Children.Add(uus_nang, 0, 1);
+                grid2X1.Children.Add(style, 0, 2);
+                F = 0;
             }
+        }
+        private bool checkTie()
+        {
+            for (int i = 0; i < Tulemused.GetLength(0); i++)
+            {
+                for (int j = 0; j < Tulemused.GetLength(1); j++)
+                {
+                    if (Tulemused[i, j] == 2)
+                    {
+                        return false;
+                    }
+                }
+            }
+            if (F == 0)
+            {
+                return false;
+            }
+            return true;
         }
         private void Tap_Tapped(object sender, EventArgs e)
         {
-            var b = (BoxView)sender;
+            var b = (Xamarin.Forms.Image)sender;
             var r = Grid.GetRow(b);
             var c = Grid.GetColumn(b);
             if (esimene == true)
             {
-                b = new BoxView { BackgroundColor = Color.Yellow };
+                b.Source = ImageSource.FromFile("krest" + Style1 + ".png");
                 esimene = false;
                 Tulemused[r, c] =1;
+                img1.Source = ImageSource.FromFile("Nolik" + Style1 + ".png");
             }
             else
             {
-                b = new BoxView { BackgroundColor = Color.Red };
+                b.Source = ImageSource.FromFile("Nolik" + Style1 + ".png");
                 esimene = true;
                 Tulemused[r, c] =2 ;
+                img1.Source = ImageSource.FromFile("krest" + Style1 + ".png");
             }
             grid3X3.Children.Add(b,c,r);
             lopp();

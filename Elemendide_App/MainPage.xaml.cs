@@ -47,7 +47,7 @@ namespace Elemendide_App
             };         
             Button ttt_btn = new Button()
             {
-                Text = "Valgusfoor",
+                Text = "TTT",
                 BackgroundColor = Color.LightGreen,
             };
 
