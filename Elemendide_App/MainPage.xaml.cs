@@ -52,13 +52,18 @@ namespace Elemendide_App
             };            
             Button picker = new Button()
             {
-                Text = "TTT",
+                Text = "Picker",
+                BackgroundColor = Color.LightGreen,
+            };           
+            Button table = new Button()
+            {
+                Text = "table",
                 BackgroundColor = Color.LightGreen,
             };
 
             StackLayout st = new StackLayout()
             {
-                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn, ttt_btn, picker }
+                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn, ttt_btn, picker, table }
             };
 
             st.BackgroundColor = Color.AntiqueWhite;
@@ -70,6 +75,12 @@ namespace Elemendide_App
             SS_btn.Clicked += SS_btn_Clicked;
             vlg_btn.Clicked += Vlg_btn_Clicked;
             picker.Clicked += Picker_Clicked;
+            table.Clicked += Table_Clicked;
+        }
+
+        private async void Table_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Table_Page());
         }
 
         private async void Picker_Clicked(object sender, EventArgs e)
