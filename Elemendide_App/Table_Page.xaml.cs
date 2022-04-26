@@ -13,8 +13,20 @@ namespace Elemendide_App
     public partial class Table_Page : ContentPage
     {
         TableView tableview;
+        SwitchCell sc;
+        ImageCell ic;
+        TableSection fotosection;
         public Table_Page()
         {
+            sc = new SwitchCell { Text = "Näita veel" };
+            sc.OnChanged += Sc_OnChanged;
+            ic = new ImageCell
+            {
+                ImageSource = ImageSource.FromFile("cat.jpg"),
+                Text = "Foto Nimetus",
+                Detail = "Foto kirjeldus"
+            };
+            fotosection = new TableSection();
             tableview = new TableView
             {
                 Intent = TableIntent.Form,
@@ -43,10 +55,27 @@ namespace Elemendide_App
                             Placeholder="sisesta email",
                             Keyboard=Keyboard.Email
                         },
+                        sc
                     },
+                    fotosection
                 }
             };
             Content = tableview;
+        }
+        private void Sc_OnChanged(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                fotosection.Title = "Foto:";
+                fotosection.Add(ic);
+                sc.Text = "Peida";
+            }
+            else
+            {
+                fotosection.Title = "";
+                fotosection.Remove(ic);
+                sc.Text = "Näita veel";
+            }
         }
     }
 }
