@@ -15,7 +15,7 @@ namespace Elemendide_App
         Picker picker;
         WebView webView;
         StackLayout st;
-        Entry en, en2;
+        Entry en;
         Grid grid2X1;
         Button btn1, btn2, btn3;
         string newUrl = "";

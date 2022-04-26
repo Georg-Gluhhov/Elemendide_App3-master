@@ -14,7 +14,7 @@ namespace Elemendide_App
     {
         Grid grid2X1, grid3X3;
         Xamarin.Forms.Image b;
-        Image img1, img2;
+        Image img1;
         Button uus_nang, style;
         public bool esimene;    
         public int F=0;

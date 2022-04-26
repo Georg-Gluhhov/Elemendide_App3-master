@@ -54,7 +54,7 @@ namespace Elemendide_App
             Content = st;
         }
         int i = 0;
-        int a = 0;
+
         private void Ed_TextChanged(object sender, TextChangedEventArgs e)
         {
             ed.TextChanged -= Ed_TextChanged;
