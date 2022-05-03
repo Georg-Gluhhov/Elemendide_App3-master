@@ -59,11 +59,16 @@ namespace Elemendide_App
             {
                 Text = "table",
                 BackgroundColor = Color.LightGreen,
+            };        
+            Button telefon = new Button()
+            {
+                Text = "telefon",
+                BackgroundColor = Color.LightGreen,
             };
 
             StackLayout st = new StackLayout()
             {
-                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn, ttt_btn, picker, table }
+                Children = { Ent_btn , Timer_btn , cliker , Date_btn , SS_btn,vlg_btn, ttt_btn, picker, table, telefon }
             };
 
             st.BackgroundColor = Color.AntiqueWhite;
@@ -76,6 +81,12 @@ namespace Elemendide_App
             vlg_btn.Clicked += Vlg_btn_Clicked;
             picker.Clicked += Picker_Clicked;
             table.Clicked += Table_Clicked;
+            telefon.Clicked += Telefon_Clicked;
+        }
+
+        private async void Telefon_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Telefon_Page());
         }
 
         private async void Table_Clicked(object sender, EventArgs e)
