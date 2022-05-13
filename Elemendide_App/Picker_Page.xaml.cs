@@ -37,7 +37,6 @@ namespace Elemendide_App
                 Text="next"
                 
             };     
-
             btn2 = new Button
             {
                 Text="privious"
