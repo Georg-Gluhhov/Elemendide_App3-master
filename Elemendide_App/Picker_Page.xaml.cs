@@ -34,7 +34,7 @@ namespace Elemendide_App
 
             btn1 = new Button
             {
-                Text="next"
+                Text="next" 
                 
             };     
             btn2 = new Button
@@ -69,7 +69,6 @@ namespace Elemendide_App
             webView.GestureRecognizers.Add(swipe);
             st = new StackLayout { Children = { picker,en, grid2X1 } };
             Content = st;
-
         }
 
         private async void Btn3_Clicked(object sender, EventArgs e)
