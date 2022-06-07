@@ -39,7 +39,6 @@ namespace Elemendide_App
                 HasUnevenRows = true,
                 ItemsSource = eurupos,
                 ItemTemplate = new DataTemplate(() => {
-
                     ImageCell imageCell = new ImageCell { TextColor = Color.DarkSeaGreen, DetailColor = Color.White, };
                     imageCell.SetBinding(ImageCell.TextProperty, "Nimetus");
                     Binding companyBinding = new Binding { Path = "Pealinn", StringFormat = "Pealinn on: {0}" };
@@ -73,7 +72,6 @@ namespace Elemendide_App
             if (euriik != null)
             {
                 eurupos.Remove(euriik);
-                //list.SelectedItem = null;
             }
         }
 

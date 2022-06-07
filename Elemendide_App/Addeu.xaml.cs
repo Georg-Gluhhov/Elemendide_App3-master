@@ -23,8 +23,6 @@ namespace Elemendide_App
         
         public string test = "Latvia";
 
-        //Europarigid europarigida = new Europarigid();
-
         public Addeu()
         {
             
@@ -68,7 +66,7 @@ namespace Elemendide_App
             canceleu.Clicked += Canceleu_Clicked;
             tabelview = new TableView
             {
-                Intent = TableIntent.Form, //могут быть ещё Menu, Data, Settings
+                Intent = TableIntent.Form, 
                 Root = new TableRoot("Andmete riik")
                 {
                     new TableSection("Riik:")
@@ -92,15 +90,11 @@ namespace Elemendide_App
 
             Europarigid.eurupos.Add(new Euuropa { Nimetus = nimieu.Text, Pealinn = pealinneue.Text, Elanikkond = elanikkondeu.Text, Pilt = pilteu.Text});
             await Navigation.PopAsync();
-            //await Navigation.PushAsync(new Europarigid());
             
         }
 
         private async void Canceleu_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new Europarigid());
-            /*string eurupos = europarigida.eurupos;
-            eurupos.Add(new Euuropa { Nimetus = nimetuseu, Pealinn = pealinneu, Elanikkond = elanikuperedelen });*/
             await Navigation.PopAsync();
         }
     }
